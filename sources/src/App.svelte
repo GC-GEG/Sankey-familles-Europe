@@ -52,7 +52,10 @@
     return area().x((d) => d[0]).y0((d) => P[d[1]][b].y).y1((d) => P[d[1]][b].y + P[d[1]][b].n * u).curve(courbe)(pts);
   }
 
-  $: ANNEES = tel ? [0, 6, 12] : [0, 4, 8, 12, 16, 20];   // tous les 6 ans (téléphone) ou 4 ans
+  // Graduations tous les 6 ans (téléphone) ou 4 ans ; on retire celles qui toucheraient « Aujourd'hui ».
+  $: ANNEES = (tel ? [0, 6, 12, 18] : [0, 4, 8, 12, 16, 20]).filter((i) => X[i] + 20 < X[IAUJ] - L.auj.length * 9 - 10);
+  // Clé et valeurs dans l'ordre du graphique (de haut en bas, aujourd'hui).
+  $: ORDRE = BLOCS.slice().sort((a, c) => P[IAUJ][a].y - P[IAUJ][c].y);
   const an = (i) => (i === 0 ? 2004 : 2004 + i);
   $: libelle = sel === ISC ? L.scenLong : sel === IAUJ ? L.aujLong : sel === 0 ? L.mai : L.an(an(sel));
 
@@ -73,7 +76,7 @@
   </header>
 
   <ul class="cle" aria-label="Clé de lecture">
-    {#each BLOCS as b}
+    {#each ORDRE as b}
       <li><svg width="14" height="10" aria-hidden="true"><rect width="14" height="10" rx="2" fill={COUL[b]} /></svg>{L.cle[b]}</li>
     {/each}
   </ul>
@@ -81,7 +84,7 @@
   <div class="repere" aria-live="polite">
     <span class="jour">{libelle}</span>
     <span class="valeurs">
-      {#each BLOCS as b}
+      {#each ORDRE as b}
         <span class="val"><i style="background:{COUL[b]}"></i>{L.courts[b]} <b>{DATA[sel][b]}</b></span>
       {/each}
     </span>

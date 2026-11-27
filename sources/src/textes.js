@@ -2,7 +2,7 @@
 export const LANGUES = {
   fr: {
     html: 'fr',
-    titre: 'Au Conseil européen, la gauche pourrait tomber à son plus bas niveau depuis 2004',
+    titre: 'Une défaite de Sánchez en Espagne laisserait seulement deux dirigeants de gauche au Conseil européen',
     chapo: 'Membres du Conseil européen par famille politique au 1er janvier de chaque année (au 1er mai pour 2004, date de l’élargissement), au 27 novembre 2026 et en cas de défaite de Pedro Sánchez aux législatives espagnoles du 29 novembre',
     blocs: { gauche: 'Gauche', centre: 'Centre', ind: 'Indépendants', droite: 'Droite', nat: 'ECR et Patriotes' },
     courts: { gauche: 'Gauche', centre: 'Centre', ind: 'Indép.', droite: 'Droite', nat: 'ECR, PfE' },
@@ -15,7 +15,7 @@ export const LANGUES = {
   },
   es: {
     html: 'es',
-    titre: 'En el Consejo Europeo, la izquierda podría caer a su nivel más bajo desde 2004',
+    titre: 'Una derrota de Sánchez en España dejaría solo a dos dirigentes de izquierda en el Consejo Europeo',
     chapo: 'Miembros del Consejo Europeo por familia política a 1 de enero de cada año (a 1 de mayo en 2004, fecha de la ampliación), a 27 de noviembre de 2026 y en caso de derrota de Pedro Sánchez en las elecciones generales españolas del 29 de noviembre',
     blocs: { gauche: 'Izquierda', centre: 'Centro', ind: 'Independientes', droite: 'Derecha', nat: 'ECR y Patriotas' },
     courts: { gauche: 'Izquierda', centre: 'Centro', ind: 'Indep.', droite: 'Derecha', nat: 'ECR, PfE' },
@@ -28,7 +28,7 @@ export const LANGUES = {
   },
   it: {
     html: 'it',
-    titre: 'Al Consiglio europeo la sinistra potrebbe scendere al livello più basso dal 2004',
+    titre: 'Una sconfitta di Sánchez in Spagna lascerebbe solo due leader di sinistra nel Consiglio europeo',
     chapo: 'Membri del Consiglio europeo per famiglia politica al 1º gennaio di ogni anno (al 1º maggio per il 2004, data dell’allargamento), al 27 novembre 2026 e in caso di sconfitta di Pedro Sánchez alle elezioni politiche spagnole del 29 novembre',
     blocs: { gauche: 'Sinistra', centre: 'Centro', ind: 'Indipendenti', droite: 'Destra', nat: 'ECR e Patrioti' },
     courts: { gauche: 'Sinistra', centre: 'Centro', ind: 'Indip.', droite: 'Destra', nat: 'ECR, PfE' },
