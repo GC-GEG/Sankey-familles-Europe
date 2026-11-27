@@ -3,9 +3,9 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { viteSingleFile } from 'vite-plugin-singlefile';
 const LANGUE = process.env.VITE_LANGUE || 'fr';
 const TITRES = {
-  fr: 'Au Conseil européen, la gauche pourrait tomber à son plus bas niveau depuis 2004',
-  es: 'En el Consejo Europeo, la izquierda podría caer a su nivel más bajo desde 2004',
-  it: 'Al Consiglio europeo la sinistra potrebbe scendere al livello più basso dal 2004'
+  fr: 'Une défaite de Sánchez en Espagne laisserait seulement deux dirigeants de gauche au Conseil européen',
+  es: 'Una derrota de Sánchez en España dejaría solo a dos dirigentes de izquierda en el Consejo Europeo',
+  it: 'Una sconfitta di Sánchez in Spagna lascerebbe solo due leader di sinistra nel Consiglio europeo'
 };
 export default defineConfig({
   plugins: [svelte(), viteSingleFile(), {
