@@ -1,7 +1,7 @@
 <script>
   import { L } from './textes.js';
   import DATA from './data.json';
-  import { area, curveBumpX } from 'd3-shape';
+  import { area, curveBumpX, curveBasis } from 'd3-shape';
 
   // Ordre du spectre (sert à départager les égalités) et couleurs des blocs.
   const BLOCS = ['gauche', 'centre', 'ind', 'droite', 'nat'];
@@ -14,8 +14,8 @@
   let sel = IAUJ;
 
   $: tel = w < 600;
-  $: u = tel ? 8 : 11;                 // hauteur d'un membre (px)
-  $: g = tel ? 6 : 9;                 // écart entre rubans : les flux se détachent
+  $: u = tel ? 9 : 12;                 // hauteur d'un membre (px)
+  $: g = 2;                           // écart entre rubans : les flux se détachent
   $: labW = tel ? 70 : 160;            // colonne des étiquettes à droite
   $: y0 = 42;
   $: hmax = 28 * u + 4 * g;
@@ -40,11 +40,12 @@
     return out;
   })();
 
-  // Rubans en S (tangentes horizontales à chaque date), comme un Sankey.
-  function ruban(b, X, P, u) {
-    return area().x((d, i) => X[i]).y0((d, i) => P[i][b].y).y1((d, i) => P[i][b].y + P[i][b].n * u)
-      .curve(curveBumpX)(DATA);
+  // Rubans : longues courbes douces sur la période passée (B-spline), S net vers le scénario.
+  function ruban(b, X, P, u, i0, i1, courbe) {
+    return area().x((d) => X[d]).y0((d) => P[d][b].y).y1((d) => P[d][b].y + P[d][b].n * u)
+      .curve(courbe)(DATA.map((_, i) => i).slice(i0, i1 + 1));
   }
+  const NB = 9; // largeur des barres de nœud (px)
 
   $: ANNEES = tel ? [0, 11] : [0, 6, 11, 16];
   const an = (i) => (i === 0 ? 2004 : 2004 + i);
@@ -89,8 +90,13 @@
         <clipPath id="scenario"><rect x={X[IAUJ]} y="0" width={w} height={H} /></clipPath>
       </defs>
       {#each DESSIN as b}
-        <path d={ruban(b, X, P, u)} clip-path="url(#passe)" fill={COUL[b]} fill-opacity="0.78" stroke="#fff" stroke-width="1.2" stroke-opacity="0.9" />
-        <path d={ruban(b, X, P, u)} clip-path="url(#scenario)" fill={COUL[b]} fill-opacity="0.32" stroke="#fff" stroke-width="1.2" stroke-opacity="0.9" />
+        <path d={ruban(b, X, P, u, 0, IAUJ, curveBasis)} fill={COUL[b]} fill-opacity="0.5" />
+        <path d={ruban(b, X, P, u, IAUJ, ISC, curveBumpX)} fill={COUL[b]} fill-opacity="0.22" />
+      {/each}
+      {#each [[0, X[0]], [IAUJ, X[IAUJ] - NB], [ISC, X[ISC] - NB]] as [i, x]}
+        {#each BLOCS as b}{#if P[i][b].n}
+          <rect x={x} y={P[i][b].y} width={NB} height={P[i][b].n * u} fill={COUL[b]} fill-opacity={i === ISC ? 0.55 : 1} />
+        {/if}{/each}
       {/each}
 
       {#if sel !== IAUJ}
