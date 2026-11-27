@@ -1,7 +1,7 @@
 <script>
   import { L } from './textes.js';
   import DATA from './data.json';
-  import { area, curveMonotoneX } from 'd3-shape';
+  import { area, curveBumpX } from 'd3-shape';
 
   // Ordre du spectre (sert à départager les égalités) et couleurs des blocs.
   const BLOCS = ['gauche', 'centre', 'ind', 'droite', 'nat'];
@@ -14,8 +14,8 @@
   let sel = IAUJ;
 
   $: tel = w < 600;
-  $: u = tel ? 7 : 9;                  // hauteur d'un membre (px)
-  $: g = tel ? 14 : 22;                // écart entre rubans : les flux se détachent
+  $: u = tel ? 8 : 11;                 // hauteur d'un membre (px)
+  $: g = tel ? 6 : 9;                 // écart entre rubans : les flux se détachent
   $: labW = tel ? 70 : 160;            // colonne des étiquettes à droite
   $: y0 = 42;
   $: hmax = 28 * u + 4 * g;
@@ -40,10 +40,10 @@
     return out;
   })();
 
-  // Rubans continus (interpolation monotone) : pas de palier à chaque année.
+  // Rubans en S (tangentes horizontales à chaque date), comme un Sankey.
   function ruban(b, X, P, u) {
     return area().x((d, i) => X[i]).y0((d, i) => P[i][b].y).y1((d, i) => P[i][b].y + P[i][b].n * u)
-      .curve(curveMonotoneX)(DATA);
+      .curve(curveBumpX)(DATA);
   }
 
   $: ANNEES = tel ? [0, 11] : [0, 6, 11, 16];
@@ -89,8 +89,8 @@
         <clipPath id="scenario"><rect x={X[IAUJ]} y="0" width={w} height={H} /></clipPath>
       </defs>
       {#each DESSIN as b}
-        <path d={ruban(b, X, P, u)} clip-path="url(#passe)" fill={COUL[b]} fill-opacity={b === 'gauche' ? 0.95 : 0.8} />
-        <path d={ruban(b, X, P, u)} clip-path="url(#scenario)" fill={COUL[b]} fill-opacity={b === 'gauche' ? 0.5 : 0.34} />
+        <path d={ruban(b, X, P, u)} clip-path="url(#passe)" fill={COUL[b]} fill-opacity="0.78" stroke="#fff" stroke-width="1.2" stroke-opacity="0.9" />
+        <path d={ruban(b, X, P, u)} clip-path="url(#scenario)" fill={COUL[b]} fill-opacity="0.32" stroke="#fff" stroke-width="1.2" stroke-opacity="0.9" />
       {/each}
 
       {#if sel !== IAUJ}
