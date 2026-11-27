@@ -19,5 +19,8 @@
     "vite-plugin-singlefile": "^2.3.4",
     "world-atlas": "^2.0.2"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "d3-shape": "^3.2.1"
+  }
 }

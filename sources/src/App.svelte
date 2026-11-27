@@ -1,6 +1,7 @@
 <script>
   import { L } from './textes.js';
   import DATA from './data.json';
+  import { area, curveMonotoneX } from 'd3-shape';
 
   // Ordre du spectre (sert à départager les égalités) et couleurs des blocs.
   const BLOCS = ['gauche', 'centre', 'ind', 'droite', 'nat'];
@@ -13,11 +14,12 @@
   let sel = IAUJ;
 
   $: tel = w < 600;
-  $: u = tel ? 9 : 12;                 // hauteur d'un membre (px)
-  $: g = tel ? 4 : 6;                  // écart entre rubans
+  $: u = tel ? 7 : 9;                  // hauteur d'un membre (px)
+  $: g = tel ? 14 : 22;                // écart entre rubans : les flux se détachent
   $: labW = tel ? 70 : 160;            // colonne des étiquettes à droite
   $: y0 = 42;
-  $: H = y0 + 28 * u + 4 * g + 6;
+  $: hmax = 28 * u + 4 * g;
+  $: H = y0 + hmax + 6;
   $: plot = Math.max(200, w - labW - 6);
   // 22 points annuels (2004-2025), puis le 27/11/2026 (1,9 an après le 1/1/2025), puis le scénario.
   $: pas = plot / (21 + 1.9 + 2.4);
@@ -29,25 +31,19 @@
     const out = []; let prec = BLOCS.slice();
     DATA.forEach((d) => {
       const ord = BLOCS.map((b) => ({ b, n: d[b], r: prec.indexOf(b) })).sort((a, c) => c.n - a.n || a.r - c.r);
-      let y = y0; const o = {};
+      const pleins = ord.filter((a) => a.n);
+      const haut = pleins.reduce((t, a) => t + a.n * u, 0) + (pleins.length - 1) * g;
+      let y = y0 + (hmax - haut) / 2; const o = {};
       ord.forEach((a) => { o[a.b] = { y, n: a.n }; if (a.n) y += a.n * u + g; });
       prec = ord.map((a) => a.b); out.push(o);
     });
     return out;
   })();
 
-  function ruban(b, i0, i1, X, P, u) {
-    let haut = `M${X[i0]},${P[i0][b].y}`, bas = '';
-    for (let i = i0; i < i1; i++) {
-      const a = P[i][b], c = P[i + 1][b], m = (X[i] + X[i + 1]) / 2;
-      haut += `C${m},${a.y} ${m},${c.y} ${X[i + 1]},${c.y}`;
-    }
-    for (let i = i1; i > i0; i--) {
-      const a = P[i][b], c = P[i - 1][b], m = (X[i] + X[i - 1]) / 2;
-      bas += `C${m},${a.y + a.n * u} ${m},${c.y + c.n * u} ${X[i - 1]},${c.y + c.n * u}`;
-    }
-    const f = P[i1][b];
-    return `${haut}L${X[i1]},${f.y + f.n * u}${bas}Z`;
+  // Rubans continus (interpolation monotone) : pas de palier à chaque année.
+  function ruban(b, X, P, u) {
+    return area().x((d, i) => X[i]).y0((d, i) => P[i][b].y).y1((d, i) => P[i][b].y + P[i][b].n * u)
+      .curve(curveMonotoneX)(DATA);
   }
 
   $: ANNEES = tel ? [0, 11] : [0, 6, 11, 16];
@@ -88,13 +84,18 @@
   <div class="scene" bind:clientWidth={w}>
     <svg bind:this={svg} viewBox="0 0 {w} {H}" width={w} height={H} role="img" aria-label={L.desc}
          on:pointermove={survol} on:pointerleave={() => (sel = IAUJ)}>
+      <defs>
+        <clipPath id="passe"><rect x="-10" y="0" width={X[IAUJ] + 10} height={H} /></clipPath>
+        <clipPath id="scenario"><rect x={X[IAUJ]} y="0" width={w} height={H} /></clipPath>
+      </defs>
       {#each DESSIN as b}
-        <path d={ruban(b, 0, IAUJ, X, P, u)} fill={COUL[b]} fill-opacity={b === 'gauche' ? 0.95 : 0.82} />
-        <path d={ruban(b, IAUJ, ISC, X, P, u)} fill={COUL[b]} fill-opacity={b === 'gauche' ? 0.5 : 0.36} />
+        <path d={ruban(b, X, P, u)} clip-path="url(#passe)" fill={COUL[b]} fill-opacity={b === 'gauche' ? 0.95 : 0.8} />
+        <path d={ruban(b, X, P, u)} clip-path="url(#scenario)" fill={COUL[b]} fill-opacity={b === 'gauche' ? 0.5 : 0.34} />
       {/each}
 
       {#if sel !== IAUJ}
         <line x1={X[sel]} x2={X[sel]} y1={y0 - 6} y2={H - 2} class="guide" />
+        {#each BLOCS as b}{#if P[sel][b].n}<circle cx={X[sel]} cy={P[sel][b].y + P[sel][b].n * u / 2} r="3" fill="#fff" stroke={COUL[b]} stroke-width="1.5" />{/if}{/each}
       {/if}
 
       <g class="axe">
