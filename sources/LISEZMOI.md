@@ -12,6 +12,8 @@
 - Membre : chef d'État ou de gouvernement qui siège (président en France, à Chypre, en Lituanie et en Roumanie ; président en Bulgarie quand l'ancienne Constitution interdisait au Premier ministre intérimaire de siéger).
 - Famille (règle de l'EPRS, briefing « European Council: Facts and figures », mars 2024) : groupe du Parlement européen où siègent les eurodéputés du parti national du membre ; à défaut d'eurodéputés, parti européen dont ce parti est membre ; membre sans parti, ou eurodéputés non inscrits : « Indépendants ».
 - Familles : Gauche, S&D (PSE), Verts, Renew (ALDE/Renew), Indépendants, PPE, ECR (et prédécesseurs : UEN), PfE.
+- Blocs du graphique (choix éditorial) : gauche = S&D + Verts + Gauche (un seul dirigeant vert depuis 2004 : Emsis, Lettonie, 2004) ; centre = Renew ; droite = PPE ; ECR et Patriotes ; indépendants (présidents sans parti, gouvernements techniques et intérimaires).
+- Scénario : défaite de Pedro Sánchez aux législatives du 29 novembre 2026 (l'Espagne passe au PPE).
 - Contrôle : effectifs identiques à la série EPRS au 1er janvier pour 2011-2017 et 2023 ; écarts d'un ou deux membres les autres années, documentés dans `journal_ecarts.csv`. Effectifs S&D identiques à l'EPRS (2011-2024, sauf 2020) et à Europe Elects (chaque mois, 2019-2026).
 
 ## Sources
@@ -22,8 +24,9 @@
 - Europe Elects, European Council Tracker (données mensuelles 2019-2026, GitHub Pages).
 
 ## Points vérifiés (27/11/2026)
-- Papadopoulos (Chypre, 2004-2008) : Renew (eurodéputé DIKO au groupe ALDE).
-- Prodi (Italie, 2006-2008) : Renew (Parti démocrate européen, groupe ALDE).
+- Papadopoulos (Chypre, 2004-2008) : Renew (eurodéputé DIKO au groupe ALDE, enregistré DIKO jusqu'en 2009).
+- Prodi (Italie, 2006-2008) : Renew (rattachement individuel au Parti démocrate européen, groupe ALDE).
 - Kučinskis (Lettonie, 2016-2019) : Renew (eurodéputée ZZS au groupe ALDE, 2015-2019).
 - Smer (Slovaquie, 2006-2008) : S&D (eurodéputés restés au groupe socialiste pendant la suspension).
-- Suède : Kristersson en affaires courantes, vote d'investiture prévu le 30/11/2026 ; PPE dans tous les cas.
+- Bulgarie : président jusqu'à la révision constitutionnelle de décembre 2023, Premier ministre intérimaire ensuite (EPRS ; BTA pour Glavchev en 2024).
+- Après juin 2023 : recoupement par l'EPRS et Europe Elects.

@@ -64,9 +64,9 @@ addnote('EE', 'Juhan Parts', "Res Publica, membre du parti PPE, sans eurodéput�
 split('Brian Cowen', 'IE', [('2008-05-07', '2009-07-14', 'ECR'), ('2009-07-14', '2011-03-09', 'Renew')],
       R + "eurodéputés Fianna Fáil au groupe UEN (famille ECR) jusqu'à la fin de la législature, puis ALDE")
 setfam('CZ', 'Mirek Topolánek', '2006-09-04', 'PPE', R + "eurodéputés ODS au groupe PPE-DE jusqu'en 2009")
-setfam('CY', 'Tassos Papadopoulos', '2004-05-01', 'Renew', R + "unique eurodéputé DIKO (Matsakis) au groupe ELDR puis ALDE du 01/05/2004 au 13/07/2009 (fiche du Parlement européen) ; DIKO non rattaché à un parti européen ; Wikipedia : S&D")
+setfam('CY', 'Tassos Papadopoulos', '2004-05-01', 'Renew', R + "unique eurodéputé DIKO (Matsakis) au groupe ELDR puis ALDE du 01/05/2004 au 13/07/2009 ; le Parlement européen l'enregistre comme DIKO jusqu'en 2009 et le parti n'a pas prononcé son exclusion en 2005 ; DIKO non rattaché à un parti européen ; Wikipedia : S&D")
 addnote('SK', 'Robert Fico', "Smer suspendu du PSE du 12/10/2006 au 14/02/2008 ; ses eurodéputés restent au groupe socialiste (J. M. Wiersma, The Slovak Spectator, oct. 2006) : S&D")
-setfam('IT', 'Romano Prodi', '2006-05-17', 'Renew', R + "sans parti jusqu'à la fondation du PD (14/10/2007), membre du Parti démocrate européen, dont les eurodéputés siègent au groupe ALDE ; eurodéputés du PD partagés entre PSE et ALDE jusqu'en 2009 ; Wikipedia : S&D")
+setfam('IT', 'Romano Prodi', '2006-05-17', 'Renew', R + "sans parti, rattaché à titre individuel au Parti démocrate européen (eurodéputés au groupe ALDE) pendant tout le mandat, y compris après la fondation du PD le 14/10/2007, selon les tableaux annuels de Wikipedia ; ParlGov code le parti du chef du gouvernement comme la coalition « Centre-gauche » (L'Unione) ; Wikipedia frise : S&D")
 # 4b. Belka : Premier ministre dès le 2 mai 2004 (démission de Miller), pas le 5 août (ParlGov)
 for r in rows:
     if r['country'] == 'PL' and r['name'] == 'Leszek Miller': r['end'] = '2004-05-02'; r['note'] = 'Fin corrigée d\'après ParlGov (Wikipedia : 05/08/2004)'
@@ -76,7 +76,6 @@ for c, n, s, e, note in [('AT', 'Reinhold Mitterlehner', '2016-05-09', '2016-05-
                          ('AT', 'Hartwig Löger', '2019-05-28', '2019-06-03', 'Chancelier par intérim (ÖVP), absent de la frise')]:
     rows.append(dict(country=c, family_wiki='EPP', start=s, end=e, name=n, famille='PPE', source_famille='ajout', note=note))
 # notes de vigilance (sans changement de codage)
-addnote('SE', 'Ulf Kristersson', "En affaires courantes depuis le 17/09/2026 ; investitures d'Andersson (15/10) et de Thand Ringqvist (03/11) rejetées ; proposé par le président du Riksdag le 24/11, vote prévu le 30/11/2026 ; reste PPE dans les deux cas")
 for r in rows:
     if r['country']=='SK' and r['name']=='Robert Fico' and r['start']=='2023-10-25':
         r['note']="Eurodéputés du Smer suspendus du groupe S&D le 12/10/2023 puis non-inscrits ; compté indépendant (comme l'EPRS)"
