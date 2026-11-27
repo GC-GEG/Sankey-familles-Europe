@@ -55,7 +55,7 @@ split('Emmanuel Macron', 'FR', [('2017-05-14', '2019-07-02', 'Indépendants'), (
 setfam('SI', 'Miro Cerar', '2014-09-18', 'Renew', R + "SMC sans eurodéputés mais membre de l'ALDE : Renew (EPRS 2015-2017 ; « autres » en 2018)")
 setfam('SI', 'Marjan Šarec', '2018-09-13', 'Renew', R + "LMŠ sans eurodéputés avant juillet 2019 mais rattaché à l'ALDE : Renew (comme l'EPRS en 2019)")
 setfam('SI', 'Alenka Bratušek', '2013-03-20', 'Renew', R + "Slovénie positive sans eurodéputés mais membre de l'ALDE : Renew (comme l'EPRS)")
-setfam('LV', 'Māris Kučinskis', '2016-02-11', 'Renew', R + "liste ZZS, codé Renew comme Europe Elects et l'EPRS en 2017 (« autres » en 2018) ; Wikipedia : PPE. À vérifier")
+setfam('LV', 'Māris Kučinskis', '2016-02-11', 'Renew', R + "Parti de Liepāja, membre de l'alliance ZZS, dont l'unique eurodéputée siège au groupe ALDE de 2015 à 2019 ; comme Europe Elects et l'EPRS en 2017 (« autres » en 2018) ; Wikipedia : PPE")
 setfam('BG', 'Kiril Petkov', '2021-12-13', 'Renew', R + "PP sans eurodéputés avant 2024, rattaché à la famille libérale (Europe Elects : RE)")
 setfam('BG', 'Nikolai Denkov', '2023-06-06', 'Renew', R + "PP sans eurodéputés avant 2024, rattaché à la famille libérale (Europe Elects et EPRS 2024)")
 addnote('LV', 'Indulis Emsis', "Parti vert letton (membre du Parti vert européen) : Verts")
@@ -64,9 +64,9 @@ addnote('EE', 'Juhan Parts', "Res Publica, membre du parti PPE, sans eurodéput�
 split('Brian Cowen', 'IE', [('2008-05-07', '2009-07-14', 'ECR'), ('2009-07-14', '2011-03-09', 'Renew')],
       R + "eurodéputés Fianna Fáil au groupe UEN (famille ECR) jusqu'à la fin de la législature, puis ALDE")
 setfam('CZ', 'Mirek Topolánek', '2006-09-04', 'PPE', R + "eurodéputés ODS au groupe PPE-DE jusqu'en 2009")
-setfam('CY', 'Tassos Papadopoulos', '2004-05-01', 'Renew', R + "eurodéputé DIKO au groupe ALDE (2004-2009) ; Wikipedia : S&D. À vérifier")
-addnote('SK', 'Robert Fico', "Eurodéputés du Smer restés au groupe PSE pendant la suspension du parti par le PSE (2006-2008), à vérifier")
-addnote('IT', 'Romano Prodi', "Coalition L'Ulivo puis PD, eurodéputés partagés entre PSE et ALDE jusqu'en 2009 ; codage Wikipedia (S&D) conservé, à arbitrer")
+setfam('CY', 'Tassos Papadopoulos', '2004-05-01', 'Renew', R + "unique eurodéputé DIKO (Matsakis) au groupe ELDR puis ALDE du 01/05/2004 au 13/07/2009 (fiche du Parlement européen) ; DIKO non rattaché à un parti européen ; Wikipedia : S&D")
+addnote('SK', 'Robert Fico', "Smer suspendu du PSE du 12/10/2006 au 14/02/2008 ; ses eurodéputés restent au groupe socialiste (J. M. Wiersma, The Slovak Spectator, oct. 2006) : S&D")
+setfam('IT', 'Romano Prodi', '2006-05-17', 'Renew', R + "sans parti jusqu'à la fondation du PD (14/10/2007), membre du Parti démocrate européen, dont les eurodéputés siègent au groupe ALDE ; eurodéputés du PD partagés entre PSE et ALDE jusqu'en 2009 ; Wikipedia : S&D")
 # 4b. Belka : Premier ministre dès le 2 mai 2004 (démission de Miller), pas le 5 août (ParlGov)
 for r in rows:
     if r['country'] == 'PL' and r['name'] == 'Leszek Miller': r['end'] = '2004-05-02'; r['note'] = 'Fin corrigée d\'après ParlGov (Wikipedia : 05/08/2004)'
@@ -76,7 +76,7 @@ for c, n, s, e, note in [('AT', 'Reinhold Mitterlehner', '2016-05-09', '2016-05-
                          ('AT', 'Hartwig Löger', '2019-05-28', '2019-06-03', 'Chancelier par intérim (ÖVP), absent de la frise')]:
     rows.append(dict(country=c, family_wiki='EPP', start=s, end=e, name=n, famille='PPE', source_famille='ajout', note=note))
 # notes de vigilance (sans changement de codage)
-addnote('SE', 'Ulf Kristersson', "En affaires courantes depuis le 17/09/2026 (démission après les législatives) ; investiture d'Andersson rejetée le 15/10, de Thand Ringqvist le 03/11/2026")
+addnote('SE', 'Ulf Kristersson', "En affaires courantes depuis le 17/09/2026 ; investitures d'Andersson (15/10) et de Thand Ringqvist (03/11) rejetées ; proposé par le président du Riksdag le 24/11, vote prévu le 30/11/2026 ; reste PPE dans les deux cas")
 for r in rows:
     if r['country']=='SK' and r['name']=='Robert Fico' and r['start']=='2023-10-25':
         r['note']="Eurodéputés du Smer suspendus du groupe S&D le 12/10/2023 puis non-inscrits ; compté indépendant (comme l'EPRS)"

@@ -21,5 +21,9 @@
 - EPRS, « European Council: Facts and figures », mars 2024, p. 15 : composition au 1er janvier, 2011-2024 (`eprs_serie_2011_2024.csv`, relevé sur le graphique).
 - Europe Elects, European Council Tracker (données mensuelles 2019-2026, GitHub Pages).
 
-## Points à vérifier
-Papadopoulos (DIKO, 2004-2008), Prodi (2006-2008), Kučinskis (2016-2019), maintien des eurodéputés du Smer au groupe PSE pendant la suspension du parti (2006-2008), Suède (Kristersson en affaires courantes).
+## Points vérifiés (27/11/2026)
+- Papadopoulos (Chypre, 2004-2008) : Renew (eurodéputé DIKO au groupe ALDE).
+- Prodi (Italie, 2006-2008) : Renew (Parti démocrate européen, groupe ALDE).
+- Kučinskis (Lettonie, 2016-2019) : Renew (eurodéputée ZZS au groupe ALDE, 2015-2019).
+- Smer (Slovaquie, 2006-2008) : S&D (eurodéputés restés au groupe socialiste pendant la suspension).
+- Suède : Kristersson en affaires courantes, vote d'investiture prévu le 30/11/2026 ; PPE dans tous les cas.
