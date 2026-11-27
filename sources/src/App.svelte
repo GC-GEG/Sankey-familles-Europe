@@ -41,13 +41,18 @@
   })();
 
   // Rubans : longues courbes douces sur la période passée (B-spline), S net vers le scénario.
-  function ruban(b, X, P, u, i0, i1, courbe) {
-    return area().x((d) => X[d]).y0((d) => P[d][b].y).y1((d) => P[d][b].y + P[d][b].n * u)
-      .curve(courbe)(DATA.map((_, i) => i).slice(i0, i1 + 1));
-  }
   const NB = 9; // largeur des barres de nœud (px)
+  function ruban(b, X, P, u, i0, i1, courbe) {
+    // Points (x, indice) ; sur la période passée, paliers plats aux deux bouts pour raccorder les barres.
+    let pts = DATA.map((_, i) => [X[i], i]).slice(i0, i1 + 1);
+    if (courbe === curveBasis) {
+      const a = pts[0], z = pts[pts.length - 1];
+      pts = [a, [a[0] + NB / 2, a[1]], [a[0] + NB, a[1]], ...pts.slice(1, -1), [z[0] - NB, z[1]], [z[0] - NB / 2, z[1]], z];
+    }
+    return area().x((d) => d[0]).y0((d) => P[d[1]][b].y).y1((d) => P[d[1]][b].y + P[d[1]][b].n * u).curve(courbe)(pts);
+  }
 
-  $: ANNEES = tel ? [0, 11] : [0, 6, 11, 16];
+  $: ANNEES = tel ? [0, 6, 12] : [0, 4, 8, 12, 16, 20];   // tous les 6 ans (téléphone) ou 4 ans
   const an = (i) => (i === 0 ? 2004 : 2004 + i);
   $: libelle = sel === ISC ? L.scenLong : sel === IAUJ ? L.aujLong : sel === 0 ? L.mai : L.an(an(sel));
 
@@ -90,8 +95,8 @@
         <clipPath id="scenario"><rect x={X[IAUJ]} y="0" width={w} height={H} /></clipPath>
       </defs>
       {#each DESSIN as b}
-        <path d={ruban(b, X, P, u, 0, IAUJ, curveBasis)} fill={COUL[b]} fill-opacity="0.5" />
-        <path d={ruban(b, X, P, u, IAUJ, ISC, curveBumpX)} fill={COUL[b]} fill-opacity="0.22" />
+        <path d={ruban(b, X, P, u, 0, IAUJ, curveBasis)} fill={COUL[b]} fill-opacity="0.72" />
+        <path d={ruban(b, X, P, u, IAUJ, ISC, curveBumpX)} fill={COUL[b]} fill-opacity="0.3" />
       {/each}
       {#each [[0, X[0]], [IAUJ, X[IAUJ] - NB], [ISC, X[ISC] - NB]] as [i, x]}
         {#each BLOCS as b}{#if P[i][b].n}
